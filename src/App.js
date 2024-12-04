@@ -11,10 +11,11 @@ function App() {
   return (
     <Container>
       <Box sx={{ textAlign: 'center', mt: 4 }}>
+      <LogDisplay />
           <ConfigurationForm />
           <ControlPanel />
           <TicketStatus />
-          <LogDisplay />
+         
       </Box>
     </Container>
   );
