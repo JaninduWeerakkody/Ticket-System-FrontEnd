@@ -4,7 +4,6 @@ import ConfigurationForm from "./component/ConfigurationForm";
 import ControlPanel from "./component/ControlPanel";
 import LogDisplay from "./component/LogDisplay";
 import TicketStatus from "./component/TicketStatus";
-import Test from "./component/Test";
 
 function App() {
 

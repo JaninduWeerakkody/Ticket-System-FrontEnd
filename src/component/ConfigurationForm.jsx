@@ -22,21 +22,28 @@ const ConfigurationForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault(); 
     try {
-      const response = await fetch("", {
+      const response = await fetch("http://localhost:9095/api/config", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(configData),
       });
-        const data = await response.json();
-        console.log(data);
-
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log("Response data:", data);
+      console.log("Data submitted successfully");
     } catch (error) {
-        console.log(error);
+      console.error("Error occurred while submitting data:", error);
     }
   };
+  
 
   return (
     <Stack component="form" noValidate autoComplete="off">
