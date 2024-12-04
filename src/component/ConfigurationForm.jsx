@@ -21,6 +21,23 @@ const ConfigurationForm = () => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      const response = await fetch("", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(configData),
+      });
+        const data = await response.json();
+        console.log(data);
+
+    } catch (error) {
+        console.log(error);
+    }
+  };
+
   return (
     <Stack component="form" noValidate autoComplete="off">
       <h1>Configuration Form</h1>
@@ -72,7 +89,7 @@ const ConfigurationForm = () => {
         label="Number of Customers"
         onChange={handlechange}
       />
-      <Button variant="contained" color="success">
+      <Button variant="contained" color="success" onClick={handleSubmit}>
         Submit
       </Button>
     </Stack>
