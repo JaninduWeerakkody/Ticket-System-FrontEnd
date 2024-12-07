@@ -50,7 +50,7 @@ const LogDisplay = () => {
 
     const interval = setInterval(() => {
       fetchLogs(); // Fetch logs every 5 seconds
-    }, 5000); // Set interval to 5 seconds
+    }, 2000); // Set interval to 5 seconds
 
     // Clear interval on component unmount
     return () => clearInterval(interval);

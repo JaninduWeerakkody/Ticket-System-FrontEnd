@@ -43,7 +43,7 @@ const TicketStatus = () => {
     // Optional: Auto-refresh every 10 seconds
     const intervalId = setInterval(() => {
       fetchTicketCount();
-    }, 5000); // 10 seconds
+    }, 10); 
 
     // Cleanup the interval when the component unmounts
     return () => clearInterval(intervalId);
@@ -51,7 +51,7 @@ const TicketStatus = () => {
 
   return (
     <Box sx={{ mt: 7, textAlign: 'center' }}>
-      <h1>Ticket Status</h1>
+      <h1>Available Tickets</h1>
       {loading && <h4>Loading...</h4>}
       {error && <h4 style={{ color: 'red' }}>Error: {error}</h4>}
       {!loading && !error && <h4>{ticketCount}</h4>}

@@ -58,7 +58,7 @@ export default function App() {
                   sx={{
                     p: 3,
                     width: "100%",
-                    mt: "100%",
+                    mt: "33%",
                     height: "100%",
                     borderRadius: 2,
                     boxShadow: "0 1px 3px rgba(0,0,0,0.12)",

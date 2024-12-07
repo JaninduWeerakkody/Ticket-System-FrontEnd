@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const ControlPanel = () => {
-  const handleStart = async () => {
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  const handleApiCall = async (url, action) => {
     try {
-      const response = await fetch("http://localhost:9095/api/start", {
+      const response = await fetch(`http://localhost:9095/api/${url}`, {
         method: "POST",
       });
 
@@ -13,26 +21,29 @@ const ControlPanel = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      console.log("Started successfully");
+      setSnackbar({
+        open: true,
+        message: `${action} successful`,
+        severity: "success",
+      });
     } catch (error) {
-      console.error("Error occurred while starting:", error);
+      console.error(`Error occurred while ${action.toLowerCase()}:`, error);
+      setSnackbar({
+        open: true,
+        message: `Error occurred while ${action.toLowerCase()}`,
+        severity: "error",
+      });
     }
   };
 
-  const handleStop = async () => {
-    try {
-      const response = await fetch("http://localhost:9095/api/stop", {
-        method: "POST",
-      });
+  const handleStart = () => handleApiCall("start", "Start");
+  const handleStop = () => handleApiCall("stop", "Stop");
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      console.log("Stop successfully");
-    } catch (error) {
-      console.error("Error occurred while Stopping:", error);
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setSnackbar({ ...snackbar, open: false });
   };
 
   return (
@@ -46,8 +57,23 @@ const ControlPanel = () => {
           Stop
         </Button>
       </Box>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
 
 export default ControlPanel;
+
