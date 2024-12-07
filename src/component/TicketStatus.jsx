@@ -43,7 +43,7 @@ const TicketStatus = () => {
     // Optional: Auto-refresh every 10 seconds
     const intervalId = setInterval(() => {
       fetchTicketCount();
-    }, 10000); // 10 seconds
+    }, 5000); // 10 seconds
 
     // Cleanup the interval when the component unmounts
     return () => clearInterval(intervalId);

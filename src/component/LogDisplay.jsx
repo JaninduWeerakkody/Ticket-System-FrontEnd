@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, CircularProgress, Alert, Paper, List, ListItem, ListItemText } from "@mui/material";
+import { Box, Typography, CircularProgress, Alert, Paper, List, ListItem, ListItemText, Button, Stack } from "@mui/material";
 
 const LogDisplay = () => {
   const [logs, setLogs] = useState([]);
@@ -12,7 +12,7 @@ const LogDisplay = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:9095/api/log"); // Adjust the endpoint URL
+      const response = await fetch("http://localhost:9095/api/log");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -26,6 +26,21 @@ const LogDisplay = () => {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Function to clear logs
+  const clearLogs = async () => {
+    try {
+      const response = await fetch("http://localhost:9095/api/log", {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to clear logs. Status: ${response.status}`);
+      }
+      setLogs([]); // Clear logs in the UI
+    } catch (error) {
+      setError('Failed to clear logs: ' + error.message);
     }
   };
 
@@ -47,7 +62,18 @@ const LogDisplay = () => {
         System Logs
       </Typography>
 
-      <Paper elevation={3} sx={{ maxHeight: "400px", overflowY: "auto", p: 2 }}>
+      <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+        <Button 
+          variant="contained" 
+          color="error" 
+          onClick={clearLogs} 
+          disabled={loading}
+        >
+          Clear Logs
+        </Button>
+      </Stack>
+
+      <Paper elevation={3} sx={{ maxHeight: "600px", overflowY: "auto", p: 2 }}>
         {loading && (
           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
             <CircularProgress />
