@@ -30,7 +30,7 @@ const ControlPanel = () => {
       console.error(`Error occurred while ${action.toLowerCase()}:`, error);
       setSnackbar({
         open: true,
-        message: `Error occurred while ${action.toLowerCase()}`,
+        message: `Error System already ${action.toLowerCase()}ed `,
         severity: "error",
       });
     }
