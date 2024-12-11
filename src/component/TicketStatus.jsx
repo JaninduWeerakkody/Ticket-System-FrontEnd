@@ -11,17 +11,16 @@ const TicketStatus = () => {
     try {
       const response = await fetch('http://localhost:9095/api/tickets/count');
       
-      // Check if the response status is OK (2xx)
       if (!response.ok) {
-        const errorText = await response.text(); // Read the error response for debugging
+        const errorText = await response.text(); 
         throw new Error(`Server responded with status ${response.status}: ${errorText}`);
       }
 
-      // Parse JSON response
+      
       const data = await response.json();
       
 
-      // Validate the structure of the response
+      
       if (!data.ticketsAvailable && data.ticketsAvailable !== 0) {
         throw new Error('Invalid JSON structure: ticketsAvailable not found');
       }
@@ -36,11 +35,11 @@ const TicketStatus = () => {
     }
   };
 
-  // useEffect to fetch ticket count when the component loads
+  //fetch ticket count 
   useEffect(() => {
     fetchTicketCount();
 
-    // Optional: Auto-refresh every 10 seconds
+    // Auto-refresh every 10 seconds
     const intervalId = setInterval(() => {
       fetchTicketCount();
     }, 10); 

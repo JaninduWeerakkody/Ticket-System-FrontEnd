@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, CircularProgress, Alert, Paper, List, ListItem, ListItemText, Button, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  Stack,
+} from "@mui/material";
 
 const LogDisplay = () => {
   const [logs, setLogs] = useState([]);
@@ -33,26 +44,25 @@ const LogDisplay = () => {
   const clearLogs = async () => {
     try {
       const response = await fetch("http://localhost:9095/api/log", {
-        method: 'DELETE',
+        method: "DELETE",
       });
       if (!response.ok) {
         throw new Error(`Failed to clear logs. Status: ${response.status}`);
       }
-      setLogs([]); // Clear logs in the UI
+      setLogs([]);
     } catch (error) {
-      setError('Failed to clear logs: ' + error.message);
+      setError("Failed to clear logs: " + error.message);
     }
   };
 
   // UseEffect hook to auto-refresh logs every 5 seconds
   useEffect(() => {
-    fetchLogs(); // Fetch logs immediately when component mounts
+    fetchLogs();
 
     const interval = setInterval(() => {
-      fetchLogs(); // Fetch logs every 5 seconds
-    }, 2000); // Set interval to 5 seconds
+      fetchLogs();
+    }, 2000); // Set interval to 2 seconds
 
-    // Clear interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -63,10 +73,10 @@ const LogDisplay = () => {
       </Typography>
 
       <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
-        <Button 
-          variant="contained" 
-          color="error" 
-          onClick={clearLogs} 
+        <Button
+          variant="contained"
+          color="error"
+          onClick={clearLogs}
           disabled={loading}
         >
           Clear Logs
@@ -75,7 +85,14 @@ const LogDisplay = () => {
 
       <Paper elevation={3} sx={{ maxHeight: "600px", overflowY: "auto", p: 2 }}>
         {loading && (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
             <CircularProgress />
           </Box>
         )}
@@ -92,9 +109,7 @@ const LogDisplay = () => {
           <List>
             {logs.map((log, index) => (
               <ListItem key={index} divider>
-                <ListItemText
-                  primary={log} 
-                />
+                <ListItemText primary={log} />
               </ListItem>
             ))}
           </List>

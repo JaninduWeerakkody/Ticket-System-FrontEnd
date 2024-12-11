@@ -48,6 +48,8 @@ const ConfigurationForm = () => {
     fetchCurrentConfig();
   }, []);
 
+
+  // Function to validate form fields
   const validateField = (name, value) => {
     if (value.trim() === "") {
       return "This field is required";
@@ -82,6 +84,7 @@ const ConfigurationForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
@@ -128,6 +131,7 @@ const ConfigurationForm = () => {
     }
   };
 
+  // Function to close the snackbar
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;

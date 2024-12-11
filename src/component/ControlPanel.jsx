@@ -11,6 +11,7 @@ const ControlPanel = () => {
     severity: "success",
   });
 
+  // Function to handle API calls
   const handleApiCall = async (url, action) => {
     try {
       const response = await fetch(`http://localhost:9095/api/${url}`, {
@@ -39,6 +40,8 @@ const ControlPanel = () => {
   const handleStart = () => handleApiCall("start", "Start");
   const handleStop = () => handleApiCall("stop", "Stop");
 
+
+  // Function to close the snackbar
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
