@@ -1,70 +1,282 @@
-# Getting Started with Create React App
+README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Introduction
 
-## Available Scripts
+This system is a Ticket Management System designed to simulate and manage ticket generation, retrieval, and monitoring. It consists of a frontend built with React (MUI-based UI) and a backend powered by Spring Boot. The system allows users to configure ticket settings, start/stop operations, and view real-time status, logs, and ticket availability.
 
-In the project directory, you can run:
+Setup Instructions
 
-### `npm start`
+Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run the project locally, you will need the following installed on your machine:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Frontend Prerequisites
 
-### `npm test`
+Node.js (version 16 or higher recommended)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm (comes with Node.js)
 
-### `npm run build`
+Backend Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Java (version 17 or higher)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Maven (for building the Spring Boot application)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Installation and Setup
 
-### `npm run eject`
+1. Clone the Repository
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Set up the Backend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Navigate to the backend/ directory.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+cd backend
 
-## Learn More
+Build the application using Maven.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+mvn clean install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run the Spring Boot application.
 
-### Code Splitting
+mvn spring-boot:run
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The backend will be running at http://localhost:9095.
 
-### Analyzing the Bundle Size
+3. Set up the Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Navigate to the frontend/ directory.
 
-### Making a Progressive Web App
+cd frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Install dependencies using npm.
 
-### Advanced Configuration
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Run the React development server.
 
-### Deployment
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The frontend will be running at http://localhost:3000.
 
-### `npm run build` fails to minify
+Usage Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Configuring the System
+
+Open the web app at http://localhost:3000.
+
+Use the System Configuration form to set up ticket system properties, such as:
+
+Total Tickets: Total number of tickets to be released.
+
+Ticket Release Rate: Rate at which tickets are released.
+
+Customer Retrieval Rate: Rate at which customers retrieve tickets.
+
+Max Ticket Capacity: Maximum capacity of available tickets.
+
+Number of Vendors: Number of vendors generating tickets.
+
+Number of Customers: Number of customers retrieving tickets.
+
+Click Submit to save the configuration, which will be sent to the backend for processing.
+
+Starting and Stopping the System
+
+Use the Control Panel to start or stop the ticket system.
+
+Start Button: Starts ticket generation and retrieval.
+
+Stop Button: Stops all ticket activities.
+
+Viewing Ticket Status
+
+View the total available tickets in real-time under the Ticket Status section. The count updates every 2 seconds.
+
+Viewing Logs
+
+The System Logs section displays real-time system logs.
+
+Logs are refreshed every 2 seconds.
+
+Click Clear Logs to delete all system logs.
+
+Project Structure
+
+project-root/
+  ├── frontend/   # React application (UI/UX)
+  └── backend/    # Spring Boot application (API and logic)
+
+Backend (Spring Boot)
+
+Base URL: http://localhost:9095
+
+Key Directories:
+
+src/main/java/com/yourpackage/: Contains the Java source code.
+
+src/main/resources/: Configuration files, such as application.properties.
+
+Frontend (React + MUI)
+
+Base URL: http://localhost:3000
+
+Key Directories:
+
+src/components/: Contains reusable React components.
+
+src/pages/: Pages that the user can navigate to.
+
+src/assets/: Images, styles, and other static files.
+
+API Endpoints
+
+Configuration Endpoints
+
+Method
+
+Endpoint
+
+Description
+
+POST
+
+/api/config
+
+Sets ticket system configuration
+
+Control Endpoints
+
+Method
+
+Endpoint
+
+Description
+
+POST
+
+/api/start
+
+Starts the ticket system
+
+POST
+
+/api/stop
+
+Stops the ticket system
+
+Ticket Endpoints
+
+Method
+
+Endpoint
+
+Description
+
+GET
+
+/api/tickets/count
+
+Returns available ticket count
+
+Log Endpoints
+
+Method
+
+Endpoint
+
+Description
+
+GET
+
+/api/log
+
+Fetches system logs
+
+DELETE
+
+/api/log
+
+Clears system logs
+
+UI Controls
+
+1. System Configuration
+
+Purpose: Configure ticket-related properties.
+
+Fields:
+
+Total Tickets
+
+Ticket Release Rate
+
+Customer Retrieval Rate
+
+Max Ticket Capacity
+
+Number of Vendors
+
+Number of Customers
+
+Action: Submits configuration to the backend via a POST request to /api/config.
+
+2. Control Panel
+
+Start Button: Sends a POST request to /api/start to start ticket generation.
+
+Stop Button: Sends a POST request to /api/stop to stop ticket generation.
+
+3. Ticket Status
+
+Displays the count of available tickets, fetched from /api/tickets/count.
+
+Updates every 2 seconds.
+
+4. System Logs
+
+Displays logs in reverse chronological order.
+
+Uses /api/log to fetch logs and /api/log (DELETE) to clear them.
+
+Contributing
+
+We welcome contributions! To contribute:
+
+Fork the repository.
+
+Create a new branch (git checkout -b feature/new-feature-name).
+
+Commit your changes (git commit -m 'Add new feature').
+
+Push to the branch (git push origin feature/new-feature-name).
+
+Open a pull request.
+
+Troubleshooting
+
+Issue
+
+Solution
+
+Port in use
+
+Make sure ports 3000 and 9095 are free.
+
+Backend errors
+
+Check console logs for stack traces.
+
+UI not loading
+
+Ensure npm start is running. Check for errors in the terminal.
+
+License
+
+This project is licensed under the MIT License.
+
+Contact
+
+If you encounter issues, feel free to open an issue or submit a pull request. For questions, reach out to your-email@example.com.
